@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desa Bantengputih - Berita & Kegiatan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#4CAF50",
+              secondary: "#2c5530",
+              accent: "#45a049",
+            },
+            fontFamily: {
+              poppins: ["Poppins", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-poppins bg-gray-50">
+    <!-- Navigation -->
+    <nav
+      class="bg-white shadow-lg fixed top-0 w-full z-50 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center space-x-3">
+            <img
+              src="https://placehold.co/40x40/4CAF50/FFFFFF?text=LOGO"
+              alt="Logo Desa"
+              class="w-10 h-10 rounded-full"
+            />
+            <span class="text-xl font-bold text-secondary">BANTENGPUTIH</span>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex items-center space-x-8">
+            <a
+              href="home.html"
+              class="nav-link text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+            >
+              <i class="fas fa-home"></i>
+              <span>Beranda</span>
+            </a>
+
+            <!-- Profil Dropdown -->
+            <div class="relative group">
+              <button
+                class="nav-link active text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+              >
+                <i class="fas fa-info-circle"></i>
+                <span>Profil Desa</span>
+                <i
+                  class="fas fa-chevron-down text-xs transform group-hover:rotate-180 transition-transform duration-300"
+                ></i>
+              </button>
+              <div
+                class="absolute top-full left-0 w-56 bg-white shadow-xl rounded-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-2 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <a
+                  href="about.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 first:rounded-t-lg"
+                >
+                  <i class="fas fa-building text-primary w-4"></i>
+                  <span>Tentang Kami</span>
+                </a>
+                <a
+                  href="gallery.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 border-t border-gray-100"
+                >
+                  <i class="fas fa-images text-primary w-4"></i>
+                  <span>Galeri</span>
+                </a>
+                <a
+                  href="news.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-primary font-semibold bg-green-50 hover:bg-gray-50 transition-colors duration-200 border-t border-gray-100 last:rounded-b-lg"
+                >
+                  <i class="fas fa-newspaper text-primary w-4"></i>
+                  <span>Berita & Kegiatan</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Layanan Dropdown -->
+            <div class="relative group">
+              <button
+                class="nav-link text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+              >
+                <i class="fas fa-cogs"></i>
+                <span>Layanan</span>
+                <i
+                  class="fas fa-chevron-down text-xs transform group-hover:rotate-180 transition-transform duration-300"
+                ></i>
+              </button>
+              <div
+                class="absolute top-full left-0 w-56 bg-white shadow-xl rounded-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-2 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <a
+                  href="service.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 first:rounded-t-lg"
+                >
+                  <i class="fas fa-file-alt text-primary w-4"></i>
+                  <span>Informasi Layanan</span>
+                </a>
+                <a
+                  href="complaint.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 border-t border-gray-100"
+                >
+                  <i class="fas fa-comments text-primary w-4"></i>
+                  <span>Pengaduan Online</span>
+                </a>
+                <a
+                  href="docs.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 border-t border-gray-100 last:rounded-b-lg"
+                >
+                  <i class="fas fa-chart-line text-primary w-4"></i>
+                  <span>Transparansi</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Ekonomi Dropdown -->
+            <a
+              href="product.html"
+              class="nav-link text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+            >
+              <i class="fas fa-box"></i>
+              <span>Produk Desa</span>
+            </a>
+
+            <a
+              href="contact.html"
+              class="nav-link text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+            >
+              <i class="fas fa-phone"></i>
+              <span>Kontak</span>
+            </a>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="lg:hidden">
+            <button
+              id="mobile-menu-button"
+              class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary transition-colors duration-200"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div
+          id="mobile-menu"
+          class="lg:hidden hidden fixed inset-0 bg-white z-50 overflow-y-auto"
+        >
+          <!-- Close button -->
+          <div class="flex justify-end p-4">
+            <button
+              id="mobile-menu-close"
+              class="text-gray-500 hover:text-gray-700"
+            >
+              <svg
+                class="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="px-6 py-4 space-y-4">
+            <a
+              href="home.html"
+              class="block px-4 py-3 text-lg font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors duration-200"
+            >
+              <i class="fas fa-home w-6 mr-4"></i>Beranda
+            </a>
+
+            <!-- Mobile Profil Dropdown -->
+            <div class="mobile-dropdown">
+              <button
+                class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-3 text-lg font-medium text-secondary border-l-4 border-primary bg-green-50 rounded-r-lg"
+              >
+                <span
+                  ><i class="fas fa-info-circle w-6 mr-4"></i>Profil Desa</span
+                >
+                <i
+                  class="fas fa-chevron-down transform transition-transform duration-200"
+                ></i>
+              </button>
+              <div
+                class="mobile-dropdown-content hidden bg-gray-50 ml-6 mt-2 rounded-lg"
+              >
+                <a
+                  href="about.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-building w-5 mr-4"></i>Tentang Kami
+                </a>
+                <a
+                  href="gallery.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-images w-5 mr-4"></i>Galeri
+                </a>
+                <a
+                  href="news.html"
+                  class="block px-4 py-3 text-primary font-semibold hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-newspaper w-5 mr-4"></i>Berita & Kegiatan
+                </a>
+              </div>
+            </div>
+
+            <!-- Mobile Layanan Dropdown -->
+            <div class="mobile-dropdown">
+              <button
+                class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-3 text-lg font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors duration-200"
+              >
+                <span><i class="fas fa-cogs w-6 mr-4"></i>Layanan</span>
+                <i
+                  class="fas fa-chevron-down transform transition-transform duration-200"
+                ></i>
+              </button>
+              <div
+                class="mobile-dropdown-content hidden bg-gray-50 ml-6 mt-2 rounded-lg"
+              >
+                <a
+                  href="service.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-file-alt w-5 mr-4"></i>Informasi Layanan
+                </a>
+                <a
+                  href="complaint.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-comments w-5 mr-4"></i>Pengaduan Online
+                </a>
+                <a
+                  href="docs.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-chart-line w-5 mr-4"></i>Transparansi
+                </a>
+              </div>
+            </div>
+
+            <!-- Mobile Ekonomi Dropdown -->
+            <a
+              href="product.html"
+              class="block px-4 py-3 text-lg font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors duration-200"
+            >
+              <i class="fas fa-box w-6 mr-4"></i>Produk Desa
+            </a>
+
+            <a
+              href="contact.html"
+              class="block px-4 py-3 text-lg font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors duration-200"
+            >
+              <i class="fas fa-phone w-6 mr-4"></i>Kontak
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+      <!-- Hero Section -->
+      <section class="bg-gradient-to-r from-primary to-accent py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+            Berita & Kegiatan
+          </h1>
+          <p class="text-xl text-white opacity-90 max-w-3xl mx-auto">
+            Dapatkan informasi terbaru tentang berbagai kegiatan, program, dan
+            perkembangan yang terjadi di Desa Bantengputih
+          </p>
+        </div>
+      </section>
+
+      <!-- News Filter -->
+      <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <button
+              onclick="filterNews('semua')"
+              class="news-filter-btn active px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-accent transition-colors duration-200"
+              data-filter="semua"
+            >
+              <i class="fas fa-globe mr-2"></i>Semua Berita
+            </button>
+            <button
+              onclick="filterNews('pembangunan')"
+              class="news-filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-200"
+              data-filter="pembangunan"
+            >
+              <i class="fas fa-hammer mr-2"></i>Pembangunan
+            </button>
+            <button
+              onclick="filterNews('sosial')"
+              class="news-filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-200"
+              data-filter="sosial"
+            >
+              <i class="fas fa-users mr-2"></i>Sosial
+            </button>
+            <button
+              onclick="filterNews('ekonomi')"
+              class="news-filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-200"
+              data-filter="ekonomi"
+            >
+              <i class="fas fa-chart-line mr-2"></i>Ekonomi
+            </button>
+            <button
+              onclick="filterNews('budaya')"
+              class="news-filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-200"
+              data-filter="budaya"
+            >
+              <i class="fas fa-theater-masks mr-2"></i>Budaya
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured News -->
+      <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-6">
+              Berita Utama
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Berita terpenting dan terbaru dari Desa Bantengputih
+            </p>
+          </div>
+
+          <!-- Featured Article -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden mb-12"
+            data-category="pembangunan"
+          >
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="relative">
+                <img
+                  src="https://placehold.co/600x400/4CAF50/FFFFFF?text=Berita+Utama"
+                  alt="Peresmian Jalan Desa Baru"
+                  class="w-full h-64 lg:h-full object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-fire mr-1"></i>UTAMA
+                  </span>
+                </div>
+              </div>
+              <div class="p-8 lg:p-12">
+                <div class="flex items-center space-x-4 mb-4">
+                  <span
+                    class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-hammer mr-1"></i>Pembangunan
+                  </span>
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-calendar mr-1"></i>15 Desember 2024
+                  </span>
+                </div>
+                <h3 class="text-2xl lg:text-3xl font-bold text-secondary mb-4">
+                  Peresmian Jalan Desa Baru Sepanjang 2 KM
+                </h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                  Kepala Desa meresmikan jalan baru yang menghubungkan dusun
+                  terpencil dengan pusat desa, memudahkan akses warga untuk
+                  berbagai kegiatan ekonomi dan sosial. Pembangunan jalan ini
+                  merupakan hasil gotong royong dan bantuan pemerintah daerah.
+                </p>
+                <div class="flex items-center justify-between">
+                  <div
+                    class="flex items-center space-x-4 text-sm text-gray-500"
+                  >
+                    <span><i class="fas fa-eye mr-1"></i>245 views</span>
+                    <span><i class="fas fa-comment mr-1"></i>12 komentar</span>
+                  </div>
+                  <a
+                    href="news-detail.html"
+                    class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-accent transition-colors duration-200"
+                  >
+                    <i class="fas fa-arrow-right mr-2"></i>Baca Selengkapnya
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- News Grid -->
+      <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-6">
+              Berita Terbaru
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Ikuti perkembangan terbaru dari berbagai kegiatan dan program desa
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            id="news-grid"
+          >
+            <!-- News Card 1 -->
+            <article
+              class="news-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              data-category="ekonomi"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Pelatihan+UMKM"
+                  alt="Pelatihan UMKM"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-chart-line mr-1"></i>Ekonomi
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center space-x-2 mb-3">
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-calendar mr-1"></i>10 Desember 2024
+                  </span>
+                  <span class="text-gray-300">•</span>
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-eye mr-1"></i>89 views
+                  </span>
+                </div>
+                <h3
+                  class="text-xl font-bold text-secondary mb-3 hover:text-primary transition-colors duration-200"
+                >
+                  Pelatihan UMKM untuk Ibu-ibu PKK
+                </h3>
+                <p class="text-gray-600 mb-4 line-clamp-3">
+                  Kegiatan pelatihan pembuatan produk olahan makanan untuk
+                  meningkatkan ekonomi keluarga dan mengembangkan potensi lokal.
+                </p>
+                <div class="flex items-center justify-between">
+                  <button
+                    class="text-primary font-semibold hover:text-accent transition-colors duration-200"
+                  >
+                    Baca Selengkapnya
+                  </button>
+                  <div class="flex space-x-2">
+                    <button
+                      class="text-gray-400 hover:text-red-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button
+                      class="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-share"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- News Card 2 -->
+            <article
+              class="news-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              data-category="sosial"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Gotong+Royong"
+                  alt="Gotong Royong"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-users mr-1"></i>Sosial
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center space-x-2 mb-3">
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-calendar mr-1"></i>5 Desember 2024
+                  </span>
+                  <span class="text-gray-300">•</span>
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-eye mr-1"></i>156 views
+                  </span>
+                </div>
+                <h3
+                  class="text-xl font-bold text-secondary mb-3 hover:text-primary transition-colors duration-200"
+                >
+                  Gotong Royong Pembersihan Sungai
+                </h3>
+                <p class="text-gray-600 mb-4 line-clamp-3">
+                  Warga bergotong royong membersihkan sungai desa untuk menjaga
+                  kelestarian lingkungan dan mencegah banjir di musim hujan.
+                </p>
+                <div class="flex items-center justify-between">
+                  <button
+                    class="text-primary font-semibold hover:text-accent transition-colors duration-200"
+                  >
+                    Baca Selengkapnya
+                  </button>
+                  <div class="flex space-x-2">
+                    <button
+                      class="text-gray-400 hover:text-red-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button
+                      class="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-share"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- News Card 3 -->
+            <article
+              class="news-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              data-category="budaya"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Festival+Budaya"
+                  alt="Festival Budaya"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-theater-masks mr-1"></i>Budaya
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center space-x-2 mb-3">
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-calendar mr-1"></i>1 Desember 2024
+                  </span>
+                  <span class="text-gray-300">•</span>
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-eye mr-1"></i>203 views
+                  </span>
+                </div>
+                <h3
+                  class="text-xl font-bold text-secondary mb-3 hover:text-primary transition-colors duration-200"
+                >
+                  Festival Budaya Desa Tahunan
+                </h3>
+                <p class="text-gray-600 mb-4 line-clamp-3">
+                  Perayaan festival budaya dengan berbagai pertunjukan seni
+                  tradisional dan pameran produk lokal yang meriah dan meriah.
+                </p>
+                <div class="flex items-center justify-between">
+                  <button
+                    class="text-primary font-semibold hover:text-accent transition-colors duration-200"
+                  >
+                    Baca Selengkapnya
+                  </button>
+                  <div class="flex space-x-2">
+                    <button
+                      class="text-gray-400 hover:text-red-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button
+                      class="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-share"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- News Card 4 -->
+            <article
+              class="news-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              data-category="pembangunan"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Renovasi+Sekolah"
+                  alt="Renovasi Sekolah"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-hammer mr-1"></i>Pembangunan
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center space-x-2 mb-3">
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-calendar mr-1"></i>28 November 2024
+                  </span>
+                  <span class="text-gray-300">•</span>
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-eye mr-1"></i>134 views
+                  </span>
+                </div>
+                <h3
+                  class="text-xl font-bold text-secondary mb-3 hover:text-primary transition-colors duration-200"
+                >
+                  Renovasi Gedung Sekolah Dasar
+                </h3>
+                <p class="text-gray-600 mb-4 line-clamp-3">
+                  Dimulainya renovasi gedung SD untuk meningkatkan kualitas
+                  sarana pendidikan dan kenyamanan belajar siswa.
+                </p>
+                <div class="flex items-center justify-between">
+                  <button
+                    class="text-primary font-semibold hover:text-accent transition-colors duration-200"
+                  >
+                    Baca Selengkapnya
+                  </button>
+                  <div class="flex space-x-2">
+                    <button
+                      class="text-gray-400 hover:text-red-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button
+                      class="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-share"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- News Card 5 -->
+            <article
+              class="news-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              data-category="sosial"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Vaksinasi+Massal"
+                  alt="Vaksinasi Massal"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-users mr-1"></i>Sosial
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center space-x-2 mb-3">
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-calendar mr-1"></i>25 November 2024
+                  </span>
+                  <span class="text-gray-300">•</span>
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-eye mr-1"></i>178 views
+                  </span>
+                </div>
+                <h3
+                  class="text-xl font-bold text-secondary mb-3 hover:text-primary transition-colors duration-200"
+                >
+                  Program Vaksinasi Massal
+                </h3>
+                <p class="text-gray-600 mb-4 line-clamp-3">
+                  Kegiatan vaksinasi massal untuk menjaga kesehatan masyarakat
+                  dan memutus rantai penyebaran penyakit.
+                </p>
+                <div class="flex items-center justify-between">
+                  <button
+                    class="text-primary font-semibold hover:text-accent transition-colors duration-200"
+                  >
+                    Baca Selengkapnya
+                  </button>
+                  <div class="flex space-x-2">
+                    <button
+                      class="text-gray-400 hover:text-red-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button
+                      class="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-share"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- News Card 6 -->
+            <article
+              class="news-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              data-category="ekonomi"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Pasar+Desa"
+                  alt="Pasar Desa"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-chart-line mr-1"></i>Ekonomi
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center space-x-2 mb-3">
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-calendar mr-1"></i>20 November 2024
+                  </span>
+                  <span class="text-gray-300">•</span>
+                  <span class="text-gray-500 text-sm">
+                    <i class="fas fa-eye mr-1"></i>92 views
+                  </span>
+                </div>
+                <h3
+                  class="text-xl font-bold text-secondary mb-3 hover:text-primary transition-colors duration-200"
+                >
+                  Pembukaan Pasar Desa Baru
+                </h3>
+                <p class="text-gray-600 mb-4 line-clamp-3">
+                  Peresmian pasar desa yang baru untuk meningkatkan aktivitas
+                  ekonomi dan memberikan tempat berjualan yang layak.
+                </p>
+                <div class="flex items-center justify-between">
+                  <button
+                    class="text-primary font-semibold hover:text-accent transition-colors duration-200"
+                  >
+                    Baca Selengkapnya
+                  </button>
+                  <div class="flex space-x-2">
+                    <button
+                      class="text-gray-400 hover:text-red-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button
+                      class="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                    >
+                      <i class="fas fa-share"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Load More Button -->
+          <div class="text-center mt-12">
+            <button
+              class="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <i class="fas fa-plus mr-2"></i>Muat Lebih Banyak
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold text-primary mb-4">
+              Desa Bantengputih
+            </h3>
+            <p class="text-gray-300 mb-4">
+              Desa yang maju, mandiri, dan sejahtera untuk seluruh warga
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="https://wa.me/6281331931077"
+                target="_blank"
+                class="text-gray-300 hover:text-primary transition-colors duration-200"
+              >
+                <i class="fab fa-whatsapp text-2xl"></i>
+              </a>
+              <a
+                href="https://facebook.com/desabantengputih"
+                target="_blank"
+                class="text-gray-300 hover:text-primary transition-colors duration-200"
+              >
+                <i class="fab fa-facebook text-2xl"></i>
+              </a>
+              <a
+                href="mailto:info@bantengputih.com"
+                class="text-gray-300 hover:text-primary transition-colors duration-200"
+              >
+                <i class="fas fa-envelope text-2xl"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-primary mb-4">Menu Utama</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="home.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Beranda</a
+                >
+              </li>
+              <li>
+                <a
+                  href="about.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Tentang Kami</a
+                >
+              </li>
+              <li>
+                <a
+                  href="product.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Produk Desa</a
+                >
+              </li>
+              <li>
+                <a
+                  href="news.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Berita</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-primary mb-4">Layanan</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="complaint.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Pengaduan</a
+                >
+              </li>
+              <li>
+                <a
+                  href="docs.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Transparansi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Informasi Layanan</a
+                >
+              </li>
+              <li>
+                <a
+                  href="contact.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Kontak</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-primary mb-4">Kontak</h4>
+            <div class="space-y-3 text-gray-300">
+              <p class="flex items-start space-x-2">
+                <i class="fas fa-map-marker-alt mt-1"></i>
+                <span
+                  >Desa Bantengputih Kecamatan Karanggeneng Kabupaten Lamongan
+                  Provinsi Jawa Timur</span
+                >
+              </p>
+              <p class="flex items-center space-x-2">
+                <i class="fas fa-phone"></i>
+                <span>+62 813-3193-1077</span>
+              </p>
+              <p class="flex items-center space-x-2">
+                <i class="fas fa-envelope"></i>
+                <span>info@bantengputih.com</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-300"
+        >
+          <p>&copy; 2024 Desa Bantengputih. Semua hak cipta dilindungi.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+      // News Filter Function
+      function filterNews(category) {
+        const filterButtons = document.querySelectorAll(".news-filter-btn");
+        const newsCards = document.querySelectorAll(".news-card");
+
+        // Update active filter button
+        filterButtons.forEach((btn) => {
+          btn.classList.remove("bg-primary", "text-white");
+          btn.classList.add("bg-gray-200", "text-gray-700");
+        });
+
+        const activeBtn = document.querySelector(`[data-filter="${category}"]`);
+        activeBtn.classList.remove("bg-gray-200", "text-gray-700");
+        activeBtn.classList.add("bg-primary", "text-white");
+
+        // Filter news cards
+        newsCards.forEach((card) => {
+          if (category === "semua" || card.dataset.category === category) {
+            card.style.display = "block";
+            card.classList.remove("hidden");
+          } else {
+            card.style.display = "none";
+            card.classList.add("hidden");
+          }
+        });
+      }
+
+      // Initialize Navigation
+      document.addEventListener("DOMContentLoaded", function () {
+        new Navigation();
+      });
+    </script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
