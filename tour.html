@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desa Bantengputih - Wisata Desa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#4CAF50",
+              secondary: "#2c5530",
+              accent: "#45a049",
+            },
+            fontFamily: {
+              poppins: ["Poppins", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-poppins bg-gray-50">
+    <!-- Navigation -->
+    <nav
+      class="bg-white shadow-lg fixed top-0 w-full z-50 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center space-x-3">
+            <img
+              src="https://placehold.co/40x40/4CAF50/FFFFFF?text=LOGO"
+              alt="Logo Desa"
+              class="w-10 h-10 rounded-full"
+            />
+            <span class="text-xl font-bold text-secondary">BANTENGPUTIH</span>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden lg:flex items-center space-x-8">
+            <a
+              href="home.html"
+              class="nav-link text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+            >
+              <i class="fas fa-home"></i>
+              <span>Beranda</span>
+            </a>
+
+            <!-- Profil Dropdown -->
+            <div class="relative group">
+              <button
+                class="nav-link text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+              >
+                <i class="fas fa-info-circle"></i>
+                <span>Profil Desa</span>
+                <i
+                  class="fas fa-chevron-down text-xs transform group-hover:rotate-180 transition-transform duration-300"
+                ></i>
+              </button>
+              <div
+                class="absolute top-full left-0 w-56 bg-white shadow-xl rounded-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-2 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <a
+                  href="about.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 first:rounded-t-lg"
+                >
+                  <i class="fas fa-building text-primary w-4"></i>
+                  <span>Tentang Kami</span>
+                </a>
+                <a
+                  href="gallery.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 border-t border-gray-100"
+                >
+                  <i class="fas fa-images text-primary w-4"></i>
+                  <span>Galeri</span>
+                </a>
+                <a
+                  href="news.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 border-t border-gray-100 last:rounded-b-lg"
+                >
+                  <i class="fas fa-newspaper text-primary w-4"></i>
+                  <span>Berita & Kegiatan</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Layanan Dropdown -->
+            <div class="relative group">
+              <button
+                class="nav-link text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+              >
+                <i class="fas fa-cogs"></i>
+                <span>Layanan</span>
+                <i
+                  class="fas fa-chevron-down text-xs transform group-hover:rotate-180 transition-transform duration-300"
+                ></i>
+              </button>
+              <div
+                class="absolute top-full left-0 w-56 bg-white shadow-xl rounded-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-2 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <a
+                  href="service.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 first:rounded-t-lg"
+                >
+                  <i class="fas fa-file-alt text-primary w-4"></i>
+                  <span>Informasi Layanan</span>
+                </a>
+                <a
+                  href="complaint.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 border-t border-gray-100"
+                >
+                  <i class="fas fa-comments text-primary w-4"></i>
+                  <span>Pengaduan Online</span>
+                </a>
+                <a
+                  href="docs.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 border-t border-gray-100 last:rounded-b-lg"
+                >
+                  <i class="fas fa-chart-line text-primary w-4"></i>
+                  <span>Transparansi</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Ekonomi Dropdown -->
+            <div class="relative group">
+              <button
+                class="nav-link active text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+              >
+                <i class="fas fa-store"></i>
+                <span>Ekonomi Desa</span>
+                <i
+                  class="fas fa-chevron-down text-xs transform group-hover:rotate-180 transition-transform duration-300"
+                ></i>
+              </button>
+              <div
+                class="absolute top-full left-0 w-56 bg-white shadow-xl rounded-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-2 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <a
+                  href="product.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 first:rounded-t-lg"
+                >
+                  <i class="fas fa-box text-primary w-4"></i>
+                  <span>Produk UMKM</span>
+                </a>
+                <a
+                  href="tour.html"
+                  class="flex items-center space-x-3 px-4 py-3 text-primary font-semibold bg-green-50 hover:bg-gray-50 transition-colors duration-200 border-t border-gray-100 last:rounded-b-lg"
+                >
+                  <i class="fas fa-map-marked-alt text-primary w-4"></i>
+                  <span>Wisata Desa</span>
+                </a>
+              </div>
+            </div>
+
+            <a
+              href="contact.html"
+              class="nav-link text-secondary hover:text-primary font-medium transition-colors duration-300 flex items-center space-x-2"
+            >
+              <i class="fas fa-phone"></i>
+              <span>Kontak</span>
+            </a>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="lg:hidden">
+            <button
+              id="mobile-menu-button"
+              class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary transition-colors duration-200"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div
+          id="mobile-menu"
+          class="lg:hidden hidden fixed inset-0 bg-white z-50 overflow-y-auto"
+        >
+          <!-- Close button -->
+          <div class="flex justify-end p-4">
+            <button
+              id="mobile-menu-close"
+              class="text-gray-500 hover:text-gray-700"
+            >
+              <svg
+                class="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="px-6 py-4 space-y-4">
+            <a
+              href="home.html"
+              class="block px-4 py-3 text-lg font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors duration-200"
+            >
+              <i class="fas fa-home w-6 mr-4"></i>Beranda
+            </a>
+
+            <!-- Mobile Profil Dropdown -->
+            <div class="mobile-dropdown">
+              <button
+                class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-3 text-lg font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors duration-200"
+              >
+                <span
+                  ><i class="fas fa-info-circle w-6 mr-4"></i>Profil Desa</span
+                >
+                <i
+                  class="fas fa-chevron-down transform transition-transform duration-200"
+                ></i>
+              </button>
+              <div
+                class="mobile-dropdown-content hidden bg-gray-50 ml-6 mt-2 rounded-lg"
+              >
+                <a
+                  href="about.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-building w-5 mr-4"></i>Tentang Kami
+                </a>
+                <a
+                  href="gallery.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-images w-5 mr-4"></i>Galeri
+                </a>
+                <a
+                  href="news.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-newspaper w-5 mr-4"></i>Berita & Kegiatan
+                </a>
+              </div>
+            </div>
+
+            <!-- Mobile Layanan Dropdown -->
+            <div class="mobile-dropdown">
+              <button
+                class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-3 text-lg font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors duration-200"
+              >
+                <span><i class="fas fa-cogs w-6 mr-4"></i>Layanan</span>
+                <i
+                  class="fas fa-chevron-down transform transition-transform duration-200"
+                ></i>
+              </button>
+              <div
+                class="mobile-dropdown-content hidden bg-gray-50 ml-6 mt-2 rounded-lg"
+              >
+                <a
+                  href="service.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-file-alt w-5 mr-4"></i>Informasi Layanan
+                </a>
+                <a
+                  href="complaint.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-comments w-5 mr-4"></i>Pengaduan Online
+                </a>
+                <a
+                  href="docs.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-chart-line w-5 mr-4"></i>Transparansi
+                </a>
+              </div>
+            </div>
+
+            <!-- Mobile Ekonomi Dropdown -->
+            <div class="mobile-dropdown">
+              <button
+                class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-3 text-lg font-medium text-secondary border-l-4 border-primary bg-green-50 rounded-r-lg"
+              >
+                <span><i class="fas fa-store w-6 mr-4"></i>Ekonomi Desa</span>
+                <i
+                  class="fas fa-chevron-down transform transition-transform duration-200"
+                ></i>
+              </button>
+              <div
+                class="mobile-dropdown-content hidden bg-gray-50 ml-6 mt-2 rounded-lg"
+              >
+                <a
+                  href="product.html"
+                  class="block px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-box w-5 mr-4"></i>Produk UMKM
+                </a>
+                <a
+                  href="tour.html"
+                  class="block px-4 py-3 text-primary font-semibold hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  <i class="fas fa-map-marked-alt w-5 mr-4"></i>Wisata Desa
+                </a>
+              </div>
+            </div>
+
+            <a
+              href="contact.html"
+              class="block px-4 py-3 text-lg font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors duration-200"
+            >
+              <i class="fas fa-phone w-6 mr-4"></i>Kontak
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+      <!-- Hero Section -->
+      <section class="bg-gradient-to-r from-primary to-accent py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+            Wisata Desa Bantengputih
+          </h1>
+          <p class="text-xl text-white opacity-90 max-w-3xl mx-auto">
+            Jelajahi keindahan alam dan budaya yang menawan di Desa Banteng
+            Putih. Rasakan pengalaman wisata yang tak terlupakan dengan
+            pemandangan yang memukau
+          </p>
+        </div>
+      </section>
+
+      <!-- Tour Categories -->
+      <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <button
+              onclick="filterTours('semua')"
+              class="tour-filter-btn active px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-accent transition-colors duration-200"
+              data-filter="semua"
+            >
+              <i class="fas fa-globe mr-2"></i>Semua Wisata
+            </button>
+            <button
+              onclick="filterTours('alam')"
+              class="tour-filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-200"
+              data-filter="alam"
+            >
+              <i class="fas fa-mountain mr-2"></i>Wisata Alam
+            </button>
+            <button
+              onclick="filterTours('budaya')"
+              class="tour-filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-200"
+              data-filter="budaya"
+            >
+              <i class="fas fa-theater-masks mr-2"></i>Wisata Budaya
+            </button>
+            <button
+              onclick="filterTours('kuliner')"
+              class="tour-filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-200"
+              data-filter="kuliner"
+            >
+              <i class="fas fa-utensils mr-2"></i>Wisata Kuliner
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Tour -->
+      <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-6">
+              Destinasi Unggulan
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Destinasi wisata terbaik yang wajib dikunjungi di Desa Banteng
+              Putih
+            </p>
+          </div>
+
+          <!-- Featured Tour Card -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden mb-12"
+            data-category="alam"
+          >
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="relative">
+                <img
+                  src="https://placehold.co/600x400/4CAF50/FFFFFF?text=Air+Terjun+Sejahtera"
+                  alt="Air Terjun Sejahtera"
+                  class="w-full h-64 lg:h-full object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-star mr-1"></i>UNGGULAN
+                  </span>
+                </div>
+                <div class="absolute bottom-4 right-4">
+                  <div
+                    class="flex items-center bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm"
+                  >
+                    <i class="fas fa-camera mr-1"></i>25 Foto
+                  </div>
+                </div>
+              </div>
+              <div class="p-8 lg:p-12">
+                <div class="flex items-center space-x-4 mb-4">
+                  <span
+                    class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold"
+                  >
+                    <i class="fas fa-mountain mr-1"></i>Wisata Alam
+                  </span>
+                  <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <span class="text-gray-600 text-sm ml-1"
+                      >4.9 (127 ulasan)</span
+                    >
+                  </div>
+                </div>
+                <h3 class="text-2xl lg:text-3xl font-bold text-secondary mb-4">
+                  Air Terjun Sejahtera
+                </h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                  Air terjun spektakuler dengan ketinggian 40 meter yang
+                  dikelilingi hutan hijau yang asri. Tempat yang sempurna untuk
+                  menikmati keindahan alam dan udara segar yang menyegarkan
+                  jiwa.
+                </p>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                  <div class="text-center">
+                    <div class="text-primary font-bold text-xl">40m</div>
+                    <div class="text-gray-500 text-sm">Ketinggian</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-primary font-bold text-xl">2km</div>
+                    <div class="text-gray-500 text-sm">Jarak Hiking</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-primary font-bold text-xl">Free</div>
+                    <div class="text-gray-500 text-sm">Tiket Masuk</div>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <button
+                    class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent transition-colors duration-200"
+                  >
+                    <i class="fas fa-map-marked-alt mr-2"></i>Lihat Lokasi
+                  </button>
+                  <button
+                    class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors duration-200"
+                  >
+                    <i class="fas fa-share mr-2"></i>Bagikan
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tour Grid -->
+      <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-6">
+              Jelajahi Destinasi Lainnya
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Temukan berbagai destinasi menarik lainnya di Desa Bantengputih
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            id="tours-grid"
+          >
+            <!-- Tour Card 1 -->
+            <div
+              class="tour-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
+              data-category="alam"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Kebun+Teh+Organik"
+                  alt="Kebun Teh Organik"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold"
+                  >
+                    <i class="fas fa-leaf mr-1"></i>Alam
+                  </span>
+                </div>
+                <div class="absolute top-4 right-4">
+                  <button
+                    class="bg-white bg-opacity-80 hover:bg-opacity-100 p-2 rounded-full transition-all duration-200"
+                  >
+                    <i
+                      class="fas fa-heart text-gray-400 hover:text-red-500"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <span class="text-gray-600 text-sm ml-1">4.8 (89)</span>
+                  </div>
+                  <span class="text-primary font-bold">Free</span>
+                </div>
+                <h3 class="text-xl font-bold text-secondary mb-3">
+                  Kebun Teh Organik
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Perkebunan teh organik dengan pemandangan hijau yang memukau
+                  dan udara segar pegunungan
+                </p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center text-gray-500 text-sm">
+                    <i class="fas fa-map-marker-alt mr-1"></i>
+                    <span>5 km dari pusat desa</span>
+                  </div>
+                  <button
+                    class="bg-primary hover:bg-accent text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                  >
+                    Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tour Card 2 -->
+            <div
+              class="tour-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
+              data-category="budaya"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Homestay+Tradisional"
+                  alt="Homestay Tradisional"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-semibold"
+                  >
+                    <i class="fas fa-theater-masks mr-1"></i>Budaya
+                  </span>
+                </div>
+                <div class="absolute top-4 right-4">
+                  <button
+                    class="bg-white bg-opacity-80 hover:bg-opacity-100 p-2 rounded-full transition-all duration-200"
+                  >
+                    <i
+                      class="fas fa-heart text-gray-400 hover:text-red-500"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <span class="text-gray-600 text-sm ml-1">4.9 (56)</span>
+                  </div>
+                  <span class="text-primary font-bold">Rp 150k/malam</span>
+                </div>
+                <h3 class="text-xl font-bold text-secondary mb-3">
+                  Homestay Tradisional
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Menginap di rumah tradisional dan merasakan kehidupan desa
+                  yang autentik bersama keluarga lokal
+                </p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center text-gray-500 text-sm">
+                    <i class="fas fa-home mr-1"></i>
+                    <span>5 kamar tersedia</span>
+                  </div>
+                  <button
+                    class="bg-primary hover:bg-accent text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                  >
+                    Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tour Card 3 -->
+            <div
+              class="tour-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
+              data-category="kuliner"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Warung+Bambu"
+                  alt="Warung Bambu"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-semibold"
+                  >
+                    <i class="fas fa-utensils mr-1"></i>Kuliner
+                  </span>
+                </div>
+                <div class="absolute top-4 right-4">
+                  <button
+                    class="bg-white bg-opacity-80 hover:bg-opacity-100 p-2 rounded-full transition-all duration-200"
+                  >
+                    <i
+                      class="fas fa-heart text-gray-400 hover:text-red-500"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <span class="text-gray-600 text-sm ml-1">4.7 (134)</span>
+                  </div>
+                  <span class="text-primary font-bold">Rp 25k-50k</span>
+                </div>
+                <h3 class="text-xl font-bold text-secondary mb-3">
+                  Warung Bambu
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Nikmati kuliner khas desa dengan suasana alam yang sejuk di
+                  warung bambu tradisional
+                </p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center text-gray-500 text-sm">
+                    <i class="fas fa-clock mr-1"></i>
+                    <span>Buka 08:00-21:00</span>
+                  </div>
+                  <button
+                    class="bg-primary hover:bg-accent text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                  >
+                    Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tour Card 4 -->
+            <div
+              class="tour-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
+              data-category="alam"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Hiking+Trail"
+                  alt="Hiking Trail"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold"
+                  >
+                    <i class="fas fa-mountain mr-1"></i>Alam
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <span class="text-gray-600 text-sm ml-1">4.6 (72)</span>
+                  </div>
+                  <span class="text-primary font-bold">Free</span>
+                </div>
+                <h3 class="text-xl font-bold text-secondary mb-3">
+                  Jalur Hiking Bukit Indah
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Trekking menantang dengan pemandangan spektakuler dari puncak
+                  bukit tertinggi desa
+                </p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center text-gray-500 text-sm">
+                    <i class="fas fa-hiking mr-1"></i>
+                    <span>3 km, 2 jam</span>
+                  </div>
+                  <button
+                    class="bg-primary hover:bg-accent text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                  >
+                    Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tour Card 5 -->
+            <div
+              class="tour-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
+              data-category="budaya"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Sanggar+Seni"
+                  alt="Sanggar Seni"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-semibold"
+                  >
+                    <i class="fas fa-palette mr-1"></i>Budaya
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <span class="text-gray-600 text-sm ml-1">4.8 (45)</span>
+                  </div>
+                  <span class="text-primary font-bold">Rp 50k/workshop</span>
+                </div>
+                <h3 class="text-xl font-bold text-secondary mb-3">
+                  Sanggar Seni Tradisional
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Belajar seni tradisional seperti batik, anyaman, dan tari
+                  daerah dari seniman lokal
+                </p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center text-gray-500 text-sm">
+                    <i class="fas fa-users mr-1"></i>
+                    <span>Max 10 orang</span>
+                  </div>
+                  <button
+                    class="bg-primary hover:bg-accent text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                  >
+                    Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tour Card 6 -->
+            <div
+              class="tour-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
+              data-category="kuliner"
+            >
+              <div class="relative">
+                <img
+                  src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Kelas+Memasak"
+                  alt="Kelas Memasak"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="absolute top-4 left-4">
+                  <span
+                    class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-semibold"
+                  >
+                    <i class="fas fa-chef-hat mr-1"></i>Kuliner
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <span class="text-gray-600 text-sm ml-1">4.9 (38)</span>
+                  </div>
+                  <span class="text-primary font-bold">Rp 100k/kelas</span>
+                </div>
+                <h3 class="text-xl font-bold text-secondary mb-3">
+                  Kelas Memasak Tradisional
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Belajar memasak makanan khas desa menggunakan resep turun
+                  temurun dari ibu-ibu desa
+                </p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center text-gray-500 text-sm">
+                    <i class="fas fa-clock mr-1"></i>
+                    <span>3 jam</span>
+                  </div>
+                  <button
+                    class="bg-primary hover:bg-accent text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                  >
+                    Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Load More Button -->
+          <div class="text-center mt-12">
+            <button
+              class="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <i class="fas fa-plus mr-2"></i>Lihat Destinasi Lainnya
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tour Info Section -->
+      <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-6">
+              Mengapa Memilih Wisata Desa Kami?
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Pengalaman wisata yang autentik dengan keramahan penduduk lokal
+              dan keindahan alam yang masih asri
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center p-6">
+              <div
+                class="bg-primary bg-opacity-10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <i class="fas fa-heart text-3xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold text-secondary mb-4">
+                Keramahan Lokal
+              </h3>
+              <p class="text-gray-600">
+                Disambut dengan hangat oleh penduduk lokal yang ramah dan siap
+                membantu
+              </p>
+            </div>
+            <div class="text-center p-6">
+              <div
+                class="bg-primary bg-opacity-10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <i class="fas fa-leaf text-3xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold text-secondary mb-4">
+                Alam yang Asri
+              </h3>
+              <p class="text-gray-600">
+                Nikmati keindahan alam yang masih alami dan udara segar
+                pegunungan
+              </p>
+            </div>
+            <div class="text-center p-6">
+              <div
+                class="bg-primary bg-opacity-10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <i class="fas fa-coins text-3xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold text-secondary mb-4">
+                Harga Terjangkau
+              </h3>
+              <p class="text-gray-600">
+                Paket wisata dengan harga yang sangat terjangkau untuk semua
+                kalangan
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold text-primary mb-4">
+              Desa Bantengputih
+            </h3>
+            <p class="text-gray-300 mb-4">
+              Desa yang maju, mandiri, dan sejahtera untuk seluruh warga
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="https://wa.me/6281331931077"
+                target="_blank"
+                class="text-gray-300 hover:text-primary transition-colors duration-200"
+              >
+                <i class="fab fa-whatsapp text-2xl"></i>
+              </a>
+              <a
+                href="https://facebook.com/desabantengputih"
+                target="_blank"
+                class="text-gray-300 hover:text-primary transition-colors duration-200"
+              >
+                <i class="fab fa-facebook text-2xl"></i>
+              </a>
+              <a
+                href="mailto:info@bantengputih.com"
+                class="text-gray-300 hover:text-primary transition-colors duration-200"
+              >
+                <i class="fas fa-envelope text-2xl"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-primary mb-4">Menu Utama</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="home.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Beranda</a
+                >
+              </li>
+              <li>
+                <a
+                  href="about.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Tentang Kami</a
+                >
+              </li>
+              <li>
+                <a
+                  href="product.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Produk Desa</a
+                >
+              </li>
+              <li>
+                <a
+                  href="news.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Berita</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-primary mb-4">Layanan</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="complaint.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Pengaduan</a
+                >
+              </li>
+              <li>
+                <a
+                  href="docs.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Transparansi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Informasi Layanan</a
+                >
+              </li>
+              <li>
+                <a
+                  href="contact.html"
+                  class="text-gray-300 hover:text-primary transition-colors duration-200"
+                  >Kontak</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-primary mb-4">Kontak</h4>
+            <div class="space-y-3 text-gray-300">
+              <p class="flex items-start space-x-2">
+                <i class="fas fa-map-marker-alt mt-1"></i>
+                <span
+                  >Desa Bantengputih Kecamatan Karanggeneng Kabupaten Lamongan
+                  Provinsi Jawa Timur</span
+                >
+              </p>
+              <p class="flex items-center space-x-2">
+                <i class="fas fa-phone"></i>
+                <span>+62 813-3193-1077</span>
+              </p>
+              <p class="flex items-center space-x-2">
+                <i class="fas fa-envelope"></i>
+                <span>info@bantengputih.com</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-300"
+        >
+          <p>&copy; 2024 Desa Bantengputih. Semua hak cipta dilindungi.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+      // Tour Filter Function
+      function filterTours(category) {
+        const filterButtons = document.querySelectorAll(".tour-filter-btn");
+        const tourCards = document.querySelectorAll(".tour-card");
+
+        // Update active filter button
+        filterButtons.forEach((btn) => {
+          btn.classList.remove("bg-primary", "text-white");
+          btn.classList.add("bg-gray-200", "text-gray-700");
+        });
+
+        const activeBtn = document.querySelector(`[data-filter="${category}"]`);
+        activeBtn.classList.remove("bg-gray-200", "text-gray-700");
+        activeBtn.classList.add("bg-primary", "text-white");
+
+        // Filter tour cards
+        tourCards.forEach((card) => {
+          if (category === "semua" || card.dataset.category === category) {
+            card.style.display = "block";
+            card.classList.remove("hidden");
+          } else {
+            card.style.display = "none";
+            card.classList.add("hidden");
+          }
+        });
+      }
+
+      // Initialize Navigation
+      document.addEventListener("DOMContentLoaded", function () {
+        new Navigation();
+      });
+    </script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
