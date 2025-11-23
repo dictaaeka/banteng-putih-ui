@@ -1,55 +1,39 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Desa Bantengputih')</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#4CAF50",
-                        secondary: "#2c5530",
-                        accent: "#45a049",
-                    },
-                    fontFamily: {
-                        poppins: ["Poppins", "sans-serif"],
-                    },
-                },
-            },
-        };
-    </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="{{ asset('css/ui-styles.css') }}" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @stack('styles')
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-poppins bg-gray-50">
-    <!-- Navigation -->
-    @include('layouts.navbar')
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100">
+        @include('layouts.navigation')
 
-    <!-- Main Content -->
-    <main class="pt-16">
-        @yield('content')
-    </main>
+        <!-- Page Heading -->
+        @isset($header)
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endisset
 
-    <!-- Footer -->
-    @include('layouts.footer')
-
-    <script src="{{ asset('js/ui/utils.js') }}"></script>
-    <script src="{{ asset('js/ui/navigation.js') }}"></script>
-    <script src="{{ asset('js/ui/slider.js') }}"></script>
-    <script src="{{ asset('js/ui/animations.js') }}"></script>
-    <script src="{{ asset('js/ui/components.js') }}"></script>
-    <script src="{{ asset('js/ui-scripts.js') }}"></script>
-
-    @stack('scripts')
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
 </body>
 
 </html>

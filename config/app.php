@@ -1,7 +1,8 @@
 <?php
 
-return [
+use Illuminate\Support\ServiceProvider;
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -101,7 +102,7 @@ return [
 
     'previous_keys' => [
         ...array_filter(
-            explode(',', (string) env('APP_PREVIOUS_KEYS', ''))
+            explode(',', env('APP_PREVIOUS_KEYS', ''))
         ),
     ],
 
@@ -123,4 +124,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        /*
+         * Package Service Providers...
+         */
+
+        /*
+         * Application Service Providers...
+         */
+        App\Providers\AppServiceProvider::class,
+        App\Providers\VillageServiceProvider::class,
+    ])->toArray(),
 ];
