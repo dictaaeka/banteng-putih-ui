@@ -23,28 +23,42 @@ jobs:
     - name: Check PHP version
       run: php -v
 
+    - name: Copy .env.example to .env
+      run: cp .env.example .env
+
     - name: Install Composer dependencies
       run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
-    - name: Create .env file for Azure
-      run: |
-        echo "APP_NAME=Desa-BantengPutih" > .env.azure
-        echo "APP_ENV=production" >> .env.azure
-        echo "APP_DEBUG=false" >> .env.azure
-        echo "# APP_KEY akan diset di Azure App Settings" >> .env.azure
-        echo "# Database config akan diset di Azure App Settings" >> .env.azure
+    - name: Generate application key
+      run: php artisan key:generate
 
-    - name: Generate optimized files
+    - name: Set permissions
       run: |
-        php artisan config:clear
-        php artisan cache:clear
+        chmod -R 775 storage
+        chmod -R 775 bootstrap/cache
 
-    - name: Create deployment artifact
+    - name: Create .env.azure placeholder
+      run: |
+        echo "# Environment variables akan diatur di Azure App Service Configuration" > .env.azure
+        echo "# Jangan hapus file ini, diperlukan untuk deployment" >> .env.azure
+
+    - name: Create deployment package
       run: |
         mkdir -p deploy
-        cp -r . deploy/
-        cd deploy
-        rm -rf .git .github tests .env .env.example
+        rsync -av --progress . deploy/ \
+          --exclude .git \
+          --exclude .github \
+          --exclude tests \
+          --exclude node_modules \
+          --exclude .env \
+          --exclude .env.example \
+          --exclude .gitignore \
+          --exclude .gitattributes \
+          --exclude README.md \
+          --exclude phpunit.xml \
+          --exclude webpack.mix.js \
+          --exclude package.json \
+          --exclude yarn.lock
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
