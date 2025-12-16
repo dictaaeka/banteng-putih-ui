@@ -44,8 +44,8 @@
         <!-- Page-specific structured data -->
         <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
-            "@type": "NewsArticle",
+            "@@context": "https://schema.org",
+            "@@type": "NewsArticle",
             "name": "Berita & Kegiatan - Desa Bantengputih",
             "description": "Dapatkan informasi terbaru tentang berbagai kegiatan, program, dan perkembangan yang terjadi di Desa Bantengputih",
             "url": "{{ request()->url() }}"

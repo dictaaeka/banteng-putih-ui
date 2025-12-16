@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class News extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia;
+    use \Illuminate\Database\Eloquent\Factories\HasFactory, InteractsWithMedia, SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -156,7 +156,7 @@ class News extends Model implements HasMedia
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
             ->width(400)
@@ -176,7 +176,7 @@ class News extends Model implements HasMedia
         $counter = 1;
 
         while (static::where('slug', $slug)
-            ->when($excludeId, fn($query) => $query->where('id', '!=', $excludeId))
+            ->when($excludeId, fn ($query) => $query->where('id', '!=', $excludeId))
             ->exists()
         ) {
             $slug = $originalSlug . '-' . $counter;

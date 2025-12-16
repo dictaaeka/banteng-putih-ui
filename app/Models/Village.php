@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Village extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+
     protected $fillable = [
         'name',
         'description',
@@ -32,7 +34,9 @@ class Village extends Model
     // Get formatted phone for WhatsApp
     public function getWhatsappUrlAttribute()
     {
-        if (!$this->phone) return null;
+        if (! $this->phone) {
+            return null;
+        }
 
         $phone = preg_replace('/[^0-9]/', '', $this->phone);
 

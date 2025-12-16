@@ -5,8 +5,8 @@
         <!-- Page-specific structured data -->
         <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
+            "@@context": "https://schema.org",
+            "@@type": "WebPage",
             "name": "Upload Foto & Video",
             "description": "Bagikan foto atau video menarik tentang desa untuk memperkaya galeri dokumentasi Desa Bantengputih",
             "url": "{{ request()->url() }}"
@@ -190,23 +190,19 @@
                                 </div>
                                 <p class="text-lg font-medium text-gray-900 mb-2">Pilih file untuk diupload</p>
                                 <p class="text-sm text-gray-500 mb-4" id="file-info">
-                                    @if (isset($selectedType))
-                                        @if ($selectedType === 'photo')
-                                            Format yang didukung: JPG, PNG, GIF, WEBP (Maks. 10MB)
-                                        @else
-                                            Format yang didukung: MP4, WEBM, MOV, AVI, WMV (Maks. 200MB)
-                                        @endif
-                                    @else
-                                        Pilih jenis konten terlebih dahulu
-                                    @endif
+                                    {{ isset($selectedType) ? ($selectedType === 'photo' ? 'Format yang didukung: JPG, PNG, GIF, WEBP (Maks. 10MB)' : 'Format yang didukung: MP4, WEBM, MOV, AVI, WMV (Maks. 200MB)') : 'Pilih jenis konten terlebih dahulu' }}
                                 </p>
-                                <input type="file" id="file" name="file" required class="hidden"
+                                    @php
+                                        $acceptTypes = '';
+                                        if (isset($selectedType)) {
+                                            $acceptTypes = $selectedType === 'photo' 
+                                                ? 'image/jpeg,image/png,image/gif,image/webp' 
+                                                : 'video/mp4,video/webm,video/mov,video/avi,video/wmv';
+                                        }
+                                    @endphp
+                                    <input type="file" id="file" name="file" required class="hidden"
                                     onchange="previewFile(this)"
-                                    @if (isset($selectedType)) @if ($selectedType === 'photo')
-                                        accept="image/jpeg,image/png,image/gif,image/webp"
-                                    @else
-                                        accept="video/mp4,video/webm,video/mov,video/avi,video/wmv" @endif
-                                    @endif>
+                                    accept="{{ $acceptTypes }}">
                                 <button type="button" onclick="document.getElementById('file').click()"
                                     class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors">
                                     Pilih File

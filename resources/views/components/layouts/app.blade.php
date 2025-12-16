@@ -42,35 +42,7 @@
     <meta name="twitter:image" content="{{ $twitterImage ?? asset('images/og-image.jpg') }}">
 
     <!-- Local Business Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "GovernmentOrganization",
-        "name": "Pemerintah Desa Bantengputih",
-        "alternateName": "Desa Bantengputih",
-        "url": "{{ config('app.url') }}",
-        "logo": "{{ asset('images/logo.png') }}",
-        "description": "Pemerintahan Desa Bantengputih, Kecamatan Karanggeneng, Kabupaten Lamongan, Jawa Timur",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Desa Bantengputih",
-            "addressLocality": "Karanggeneng",
-            "addressRegion": "Lamongan",
-            "addressCountry": "ID"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "-7.2575",
-            "longitude": "112.4262"
-        },
-        "telephone": "(0322) 123-4567",
-        "email": "bantengputih@lamongan.go.id",
-        "sameAs": [
-            "https://www.facebook.com/desabantengputih",
-            "https://www.instagram.com/desabantengputih"
-        ]
-    }
-    </script>
+
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
@@ -130,25 +102,6 @@
     <!-- Additional Scripts -->
     @stack('scripts')
 
-    <!-- Structured Data for Breadcrumbs (if applicable) -->
-    @if (isset($breadcrumbs))
-        <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            @foreach($breadcrumbs as $index => $breadcrumb)
-            {
-                "@type": "ListItem",
-                "position": {{ $index + 1 }},
-                "name": "{{ $breadcrumb['name'] }}",
-                "item": "{{ $breadcrumb['url'] }}"
-            }{{ !$loop->last ? ',' : '' }}
-            @endforeach
-        ]
-    }
-    </script>
-    @endif
 </body>
 
 </html>
