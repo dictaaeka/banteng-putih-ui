@@ -34,14 +34,14 @@ class ComplaintController extends Controller
 
         $message = $this->formatWhatsAppMessage($request->all());
 
-        $whatsappNumber = Village::first()->phone ?? '6281331931077';
+        $whatsappNumber = Village::first()->phone ?? '6285330632334';
 
         $whatsappUrl = "https://wa.me/{$whatsappNumber}?text=" . urlencode($message);
 
         if ($request->ajax()) {
             return response()->json([
                 'success' => true,
-                'whatsapp_url' => $whatsappUrl
+                'whatsapp_url' => $whatsappUrl,
             ]);
         }
 
@@ -54,18 +54,18 @@ class ComplaintController extends Controller
         $message .= "📋 DETAIL PENGADUAN:\n";
         $message .= "━━━━━━━━━━━━━━━━━━━━━━\n\n";
 
-        $nama = !empty($data['nama']) && trim($data['nama']) !== '' ? $data['nama'] : 'Anonim';
+        $nama = ! empty($data['nama']) && trim($data['nama']) !== '' ? $data['nama'] : 'Anonim';
 
         $message .= "👤 Nama: {$nama}\n";
-        $message .= "📂 Kategori: " . ucfirst($data['kategori']) . "\n";
+        $message .= '📂 Kategori: ' . ucfirst($data['kategori']) . "\n";
         $message .= "📌 Judul: {$data['judul']}\n\n";
 
         $message .= "📝 Isi Pengaduan:\n";
         $message .= "{$data['isi']}\n\n";
 
         $message .= "━━━━━━━━━━━━━━━━━━━━━━\n";
-        $message .= "🕐 Dikirim pada: " . now()->setTimezone('Asia/Jakarta')->translatedFormat('d F Y') . " pukul " . now()->setTimezone('Asia/Jakarta')->format('H:i') . " WIB\n";
-        $message .= "🌐 Melalui: Website Resmi Desa Bantengputih";
+        $message .= '🕐 Dikirim pada: ' . now()->setTimezone('Asia/Jakarta')->translatedFormat('d F Y') . ' pukul ' . now()->setTimezone('Asia/Jakarta')->format('H:i') . " WIB\n";
+        $message .= '🌐 Melalui: Website Resmi Desa Bantengputih';
 
         return $message;
     }

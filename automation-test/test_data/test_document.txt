@@ -1,0 +1,11 @@
+This is a test document file created for automation testing.
+
+This file is used to test document upload functionality in the Document Management system.
+
+Content:
+- Test Data
+- Sample Information
+- Automation Testing
+
+Created by: Selenium Test Automation
+Purpose: Testing file upload features
