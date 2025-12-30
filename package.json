@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite",
+    "dev": "concurrently \"vite\" \"php artisan serve\",",
     "validate-naming": "node ./scripts/validate-naming.cjs",
     "validate-merge": "node ./scripts/validate-merge.cjs",
     "check-env": "node ./scripts/check-environment.cjs",
@@ -35,7 +35,7 @@
     "alpinejs": "^3.4.2",
     "autoprefixer": "^10.4.2",
     "axios": "^1.8.2",
-    "concurrently": "^9.0.1",
+    "concurrently": "^9.2.1",
     "husky": "^9.1.7",
     "laravel-vite-plugin": "^1.2.0",
     "lint-staged": "^16.2.7",
