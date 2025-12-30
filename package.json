@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "concurrently \"vite\" \"php artisan serve\",",
+    "dev": "concurrently \"vite\" \"php artisan serve\"",
     "validate-naming": "node ./scripts/validate-naming.cjs",
     "validate-merge": "node ./scripts/validate-merge.cjs",
     "check-env": "node ./scripts/check-environment.cjs",
