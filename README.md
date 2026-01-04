@@ -1,8 +1,3 @@
-Berikut adalah `README.md` yang **rapi, informatif, dan siap pakai** untuk dokumentasi proyek Laravel + Filament + Livewire kamu, lengkap dengan instruksi setup, development, dan deployment:
-
----
-
-````md
 # 🌾 Website Desa Banteng Putih
 
 Website dinamis untuk Desa Banteng Putih menggunakan **Laravel 11**, **Filament v3**, **Livewire v3**, dan integrasi **Spatie Media Library**. Mendukung panel admin, form interaktif, pengelolaan konten dinamis (produk, berita, layanan, dll), dan siap untuk deployment.
@@ -95,59 +90,9 @@ Password: password
 
 ---
 
-## 🧪 Tips Pengembangan
-
-* Gunakan command `make:filament-resource` untuk CRUD panel admin
-* Gunakan `make:livewire` untuk komponen publik di frontend
-* Gunakan Spatie Media Library untuk upload gambar/dokumen
-* Gunakan Livewire pagination untuk daftar berita, dokumen, produk
-* Gunakan Laravel Excel untuk ekspor statistik/dokumen
-* Gunakan `.env` untuk set konfigurasi WhatsApp/footer dinamis
-
----
-
-## ☁️ Deployment
-
-**Rekomendasi Hosting:**
-
-* [Laravel Forge + VPS](https://forge.laravel.com/)
-* [Render.com](https://render.com/)
-* [Domainesia](https://domainesia.com/)
-* cPanel (pastikan folder `public/` dijadikan root)
-
-**Langkah umum:**
-
-```bash
-# Production build
-composer install --optimize-autoloader --no-dev
-php artisan config:cache
-php artisan route:cache
-php artisan migrate --force
-npm run build
-```
-
----
-
 ## 📎 Lisensi
 
 Proyek ini dikembangkan untuk keperluan publikasi desa secara terbuka dan transparan.
 Lisensi: MIT.
 
 ---
-
-## ✨ Dikembangkan oleh
-
-* 📍 Desa Banteng Putih
-* 💻 Dev: [Ananda Bintang](mailto:anandabintang4@gmail.com)
-
-```
-
----
-
-### ✅ Saran Lanjutan:
-- Ubah `anandabintang4@gmail.com` ke email aslimu.
-- Jika pakai GitHub, push proyekmu lalu pasang README ini.
-- Mau saya bantu buatkan `seeder`, atau `git init` + `.gitignore` juga?
-
-Tinggal bilang saja!
-```
