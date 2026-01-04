@@ -1,0 +1,350 @@
+"""
+Test cases for Document Management (Full CRUD Lifecycle)
+Enhanced test suite with Create → Search → Edit → Delete flow
+"""
+import pytest
+import time
+import os
+from pathlib import Path
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from pages.login_page import LoginPage
+from pages.dashboard_page import DashboardPage
+from pages.document_page import DocumentPage
+from config import Config
+
+
+@pytest.mark.documents
+class TestDocumentManagement:
+    """Test document CRUD operations with full lifecycle"""
+
+    @pytest.fixture(autouse=True)
+    def setup(self, logged_in_driver):
+        """Setup for each test - navigate to documents page"""
+        self.driver = logged_in_driver
+        self.document_page = DocumentPage(self.driver)
+        self.document_page.navigate()
+        time.sleep(2)
+        print(f"\n📍 Current URL: {self.driver.current_url}")
+
+    def test_navigate_to_documents_page(self, driver):
+        """Test: Navigate to documents management page"""
+        print("\n=== Test: Navigate to Documents Page ===")
+
+        assert self.document_page.is_on_documents_page(), "Not on documents page"
+        print("✓ Successfully navigated to documents page")
+
+    def test_create_document_without_file(self):
+        """Test: Create new document with all required fields"""
+        print("\n=== Test: Create Complete Document ===")
+
+        # Click create button
+        assert self.document_page.click_create_button(), "Failed to click create button"
+        print("✓ Clicked create button")
+
+        # Prepare test data
+        test_title = f"Peraturan Desa Nomor {int(time.time())}"
+        test_category = "Produk Hukum"
+        test_type = "Peraturan Desa"
+        test_description = "Peraturan Desa tentang Anggaran Pendapatan dan Belanja Desa (APBDes) Tahun Anggaran 2025"
+
+        # Get PDF file path
+        test_file_path = Path(__file__).parent.parent / "test_data" / "sample_document.pdf"
+
+        # Fill form with ALL required fields
+        success = self.document_page.fill_document_form(
+            title=test_title,
+            category=test_category,
+            doc_type=test_type,
+            description=test_description,
+            file_path=str(test_file_path.absolute())
+        )
+        assert success, "Failed to fill document form"
+        print("✓ Filled document form with all required fields")
+
+        # Save
+        assert self.document_page.click_save(), "Failed to click save"
+        print("✓ Clicked save button")
+
+        time.sleep(3)
+
+        # Verify success message or redirect
+        current_url = self.document_page.get_current_url()
+        success_msg = self.document_page.get_success_message()
+
+        assert '/admin/documents' in current_url, f"Not redirected to documents page. URL: {current_url}"
+        print(f"✓ Document created successfully")
+        if success_msg:
+            print(f"  Success message: {success_msg}")
+
+    def test_create_document_with_file(self):
+        """Test: Create document with different category (Layanan Informasi)"""
+        print("\n=== Test: Create Document - Layanan Informasi ===")
+
+        # Click create button
+        assert self.document_page.click_create_button(), "Failed to click create button"
+        print("✓ Clicked create button")
+
+        # Prepare test data - different category and type
+        test_title = f"Laporan Keuangan Desa {int(time.time())}"
+        test_category = "Layanan Informasi"
+        test_type = "Laporan"
+        test_description = "Laporan pertanggungjawaban keuangan desa periode semester I tahun 2025"
+
+        # Get PDF file path
+        test_file_path = Path(__file__).parent.parent / "test_data" / "sample_document.pdf"
+
+        # Fill form with all required fields
+        success = self.document_page.fill_document_form(
+            title=test_title,
+            category=test_category,
+            doc_type=test_type,
+            description=test_description,
+            file_path=str(test_file_path.absolute())
+        )
+        assert success, "Failed to fill document form"
+        print("✓ Filled document form")
+
+        # Save
+        assert self.document_page.click_save(), "Failed to click save"
+        print("✓ Clicked save button")
+
+        time.sleep(3)
+
+        # Verify
+        assert '/admin/documents' in self.document_page.get_current_url()
+        print("✓ Document (Layanan Informasi) created successfully")
+
+    def test_search_document(self):
+        """Test: Search for document"""
+        print("\n=== Test: Search Document ===")
+
+        # First create a document to search for
+        self.document_page.click_create_button()
+        test_title = f"Searchable Perdes {int(time.time())}"
+        test_file_path = Path(__file__).parent.parent / "test_data" / "sample_document.pdf"
+
+        self.document_page.fill_document_form(
+            title=test_title,
+            category="Produk Hukum",
+            doc_type="Peraturan Desa",
+            file_path=str(test_file_path.absolute())
+        )
+        self.document_page.click_save()
+        time.sleep(3)
+
+        # Now search for it
+        self.document_page.navigate()  # Go back to list
+        time.sleep(1)
+
+        success = self.document_page.search_document(test_title)
+        assert success, "Failed to perform search"
+        print("✓ Search executed")
+
+        # Verify document appears in results
+        found = self.document_page.find_document_in_table(test_title)
+        assert found is not None, f"Document '{test_title}' not found in search results"
+        print(f"✓ Found document in search results: {test_title}")
+
+    def test_edit_document(self):
+        """Test: Edit existing document"""
+        print("\n=== Test: Edit Document ===")
+
+        # Create a document first
+        self.document_page.click_create_button()
+        original_title = f"Original Perdes {int(time.time())}"
+        test_file_path = Path(__file__).parent.parent / "test_data" / "sample_document.pdf"
+
+        self.document_page.fill_document_form(
+            title=original_title,
+            category="Produk Hukum",
+            doc_type="Peraturan Desa",
+            file_path=str(test_file_path.absolute())
+        )
+        self.document_page.click_save()
+        time.sleep(3)
+
+        # Navigate back and edit
+        self.document_page.navigate()
+        time.sleep(1)
+
+        # Click edit
+        success = self.document_page.click_edit_for_document(original_title)
+        assert success, "Failed to click edit button"
+        print("✓ Opened edit form")
+
+        # Update title and type
+        updated_title = f"Updated Kepdes {int(time.time())}"
+        self.document_page.fill_document_form(
+            title=updated_title,
+            doc_type="Keputusan Kepala Desa"
+        )
+        self.document_page.click_save()
+        time.sleep(3)
+
+        # Verify update
+        self.document_page.navigate()
+        time.sleep(1)
+
+        found = self.document_page.find_document_in_table(updated_title)
+        assert found is not None, f"Updated document not found: {updated_title}"
+        print(f"✓ Document updated successfully to: {updated_title}")
+
+    def test_delete_document(self):
+        """Test: Delete document (soft delete with trash filter)"""
+        print("\n=== Test: Delete Document ===")
+
+        # Create a document to delete
+        self.document_page.click_create_button()
+        test_title = f"To Be Deleted {int(time.time())}"
+        test_file_path = Path(__file__).parent.parent / "test_data" / "sample_document.pdf"
+
+        self.document_page.fill_document_form(
+            title=test_title,
+            category="Produk Hukum",
+            doc_type="Program & Kegiatan",
+            file_path=str(test_file_path.absolute())
+        )
+        self.document_page.click_save()
+        time.sleep(3)
+
+        # Navigate back
+        self.document_page.navigate()
+        time.sleep(1)
+
+        # Verify it exists
+        found_before = self.document_page.find_document_in_table(test_title)
+        assert found_before is not None, "Document not found before delete"
+        print("✓ Document exists before deletion")
+
+        # Delete it
+        success = self.document_page.click_delete_for_document(test_title)
+        assert success, "Failed to delete document"
+        print("✓ Delete action executed")
+
+        time.sleep(2)
+
+        # Verify it's gone
+        self.document_page.navigate()  # Refresh
+        time.sleep(1)
+
+        found_after = self.document_page.find_document_in_table(test_title)
+        assert found_after is None, f"Document still exists after delete: {test_title}"
+        print("✓ Document deleted successfully")
+
+    def test_view_document_preview(self):
+        """Test: View/Preview PDF document"""
+        print("\n=== Test: View Document Preview ===")
+
+        # Create a PDF document (only PDF can be previewed)
+        self.document_page.click_create_button()
+        test_title = f"Preview PDF {int(time.time())}"
+        test_file_path = Path(__file__).parent.parent / "test_data" / "sample_document.pdf"
+
+        self.document_page.fill_document_form(
+            title=test_title,
+            category="Produk Hukum",
+            doc_type="Peraturan Desa",
+            description="PDF document for preview testing",
+            file_path=str(test_file_path.absolute())
+        )
+        self.document_page.click_save()
+        time.sleep(3)
+
+        # Navigate back
+        self.document_page.navigate()
+        time.sleep(1)
+
+        # Click preview action (only available for PDF)
+        success = self.document_page.click_view_for_document(test_title)
+
+        if success:
+            print("✓ Preview opened (PDF file)")
+            time.sleep(2)
+            # Switch back to main window if needed
+            if len(self.driver.window_handles) > 1:
+                self.driver.switch_to.window(self.driver.window_handles[0])
+        else:
+            print("⚠ Preview not available (may not be PDF or preview button not found)")
+
+    def test_download_document(self):
+        """Test: Download document"""
+        print("\n=== Test: Download Document ===")
+
+        # Create a document
+        self.document_page.click_create_button()
+        test_title = f"Download Test {int(time.time())}"
+        test_file_path = Path(__file__).parent.parent / "test_data" / "sample_document.pdf"
+
+        self.document_page.fill_document_form(
+            title=test_title,
+            category="Layanan Informasi",
+            doc_type="Laporan",
+            file_path=str(test_file_path.absolute())
+        )
+        self.document_page.click_save()
+        time.sleep(3)
+
+        # Navigate back
+        self.document_page.navigate()
+        time.sleep(1)
+
+        # Click download action
+        success = self.document_page.click_download_for_document(test_title)
+
+        if success:
+            print("✓ Download initiated")
+            time.sleep(2)
+        else:
+            print("⚠ Download button not found")
+
+    def test_full_document_lifecycle(self):
+        """Test: Complete document lifecycle (Create -> Edit -> Delete)"""
+        print("\n=== Test: Full Document Lifecycle ===")
+
+        test_file_path = Path(__file__).parent.parent / "test_data" / "sample_document.pdf"
+
+        # Step 1: Create
+        print("Step 1: Creating document...")
+        self.document_page.click_create_button()
+        test_title = f"Lifecycle Test {int(time.time())}"
+        self.document_page.fill_document_form(
+            title=test_title,
+            category="Produk Hukum",
+            doc_type="Peraturan Desa",
+            description="Testing full lifecycle",
+            file_path=str(test_file_path.absolute())
+        )
+        self.document_page.click_save()
+        time.sleep(3)
+        print("✓ Step 1: Document created")
+
+        # Step 2: Edit
+        print("Step 2: Editing document...")
+        self.document_page.navigate()
+        time.sleep(1)
+        self.document_page.click_edit_for_document(test_title)
+        updated_title = f"{test_title} - Updated"
+        self.document_page.fill_document_form(
+            title=updated_title,
+            doc_type="Keputusan Kepala Desa"
+        )
+        self.document_page.click_save()
+        time.sleep(3)
+        print("✓ Step 2: Document edited")
+
+        # Step 3: Delete
+        print("Step 3: Deleting document...")
+        self.document_page.navigate()
+        time.sleep(1)
+        self.document_page.click_delete_for_document(updated_title)
+        time.sleep(2)
+        print("✓ Step 3: Document deleted")
+
+        # Verify
+        self.document_page.navigate()
+        time.sleep(1)
+        found = self.document_page.find_document_in_table(updated_title)
+        assert found is None, "Document still exists after full lifecycle"
+        print("✓ Full lifecycle completed successfully")

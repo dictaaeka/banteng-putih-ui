@@ -1,20 +1,19 @@
 <x-layouts.app :title="$title" :description="$description" :keywords="$keywords" :ogTitle="$ogTitle" :ogDescription="$ogDescription"
     :ogImage="$ogImage">
-
     <x-slot name="head">
         <!-- Page-specific structured data -->
         <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "{{ $title }}",
-            "description": "{{ $description }}",
+            "@@context": "https://schema.org",
+            "@@type": "WebPage",
+            "name": "{{ $title ?? '' }}",
+            "description": "{{ $description ?? '' }}",
             "url": "{{ request()->url() }}",
             "mainEntity": {
-                "@type": "GovernmentOrganization",
+                "@@type": "GovernmentOrganization",
                 "name": "Pemerintah Desa Bantengputih",
                 "address": {
-                    "@type": "PostalAddress",
+                    "@@type": "PostalAddress",
                     "addressLocality": "Karanggeneng",
                     "addressRegion": "Lamongan",
                     "addressCountry": "ID"
@@ -25,7 +24,7 @@
 
         <style>
             /* Custom animations */
-            @keyframes fadeInUp {
+            @@keyframes fadeInUp {
                 from {
                     opacity: 0;
                     transform: translateY(30px);

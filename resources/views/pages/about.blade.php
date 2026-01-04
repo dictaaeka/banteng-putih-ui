@@ -5,21 +5,21 @@
         <!-- Page-specific structured data -->
         <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
-            "@type": "AboutPage",
+            "@@context": "https://schema.org",
+            "@@type": "AboutPage",
             "name": "{{ $title }}",
             "description": "{{ $description }}",
             "url": "{{ request()->url() }}",
             "mainEntity": {
-                "@type": "GovernmentOrganization",
+                "@@type": "GovernmentOrganization",
                 "name": "Pemerintah Desa Bantengputih",
                 "leader": {
-                    "@type": "Person",
+                    "@@type": "Person",
                     "name": "Musthofa",
                     "jobTitle": "Kepala Desa"
                 },
                 "address": {
-                    "@type": "PostalAddress",
+                    "@@type": "PostalAddress",
                     "addressLocality": "Karanggeneng",
                     "addressRegion": "Lamongan",
                     "addressCountry": "ID"

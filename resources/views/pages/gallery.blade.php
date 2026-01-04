@@ -6,8 +6,8 @@
         <!-- Page-specific structured data -->
         <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
-            "@type": "ImageGallery",
+            "@@context": "https://schema.org",
+            "@@type": "ImageGallery",
             "name": "{{ $title }}",
             "description": "{{ $description }}",
             "url": "{{ request()->url() }}"

@@ -17,7 +17,7 @@ class VillageSeeder extends Seeder
             'description' => 'Desa Bantengputih adalah desa yang terletak di Kecamatan Karanggeneng, Kabupaten Lamongan, Provinsi Jawa Timur. Desa ini memiliki visi untuk menjadi desa yang maju, mandiri, dan sejahtera untuk seluruh warga.',
             'logo' => null,
             'address' => 'Desa Bantengputih, Kecamatan Karanggeneng, Kabupaten Lamongan, Provinsi Jawa Timur',
-            'phone' => '6281331931077',
+            'phone' => '6285330632334',
             'email' => 'info@bantengputih.com',
             'website' => 'https://bantengputih.lamongan.go.id',
         ]);
