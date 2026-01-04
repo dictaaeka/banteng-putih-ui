@@ -84,7 +84,16 @@ pytest -m smoke
 
 # Run only authentication tests
 pytest -m authentication
+# 🧪 Tips Pengembangan
 
+* Gunakan command `make:filament-resource` untuk CRUD panel admin
+* Gunakan `make:livewire` untuk komponen publik di frontend
+* Gunakan Spatie Media Library untuk upload gambar/dokumen
+* Gunakan Livewire pagination untuk daftar berita, dokumen, produk
+* Gunakan Laravel Excel untuk ekspor statistik/dokumen
+* Gunakan `.env` untuk set konfigurasi WhatsApp/footer dinamis
+
+---
 # Run only CRUD tests
 pytest -m crud
 ```
@@ -223,15 +232,3 @@ chmod +x venv/bin/activate
 ### Port Already in Use
 
 Pastikan Laravel dev server running di port yang benar (8000)
-
-## 📄 License
-
-Project ini adalah bagian dari sistem Desa Bantengputih.
-
-## 👥 Contributors
-
-- Your Name - Initial work
-
-## 📞 Support
-
-Untuk bantuan, silakan hubungi tim development.
