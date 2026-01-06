@@ -29,7 +29,8 @@ class NewsPage(BasePage):
     # We look for the select trigger button or the wrapper
     CATEGORY_SELECT_TRIGGER = (By.XPATH, "//label[contains(text(), 'Kategori')]/ancestor::div[contains(@class, 'fi-fo-field-wrp')]//button")
     
-    EXCERPT_INPUT = (By.CSS_SELECTOR, "textarea[id*='excerpt']")
+    # CORRECTED: excerpt is TextInput, not textarea
+    EXCERPT_INPUT = (By.CSS_SELECTOR, "input[id*='excerpt']")
     CONTENT_EDITOR = (By.CSS_SELECTOR, "div.trix-content")
     IMAGE_INPUT = (By.CSS_SELECTOR, "input[type='file']")
 
@@ -78,30 +79,61 @@ class NewsPage(BasePage):
                 print("✗ Title input not found")
                 return False
 
-            # 2. Select category (Filament Select)
+            # 2. Select category (Filament Select) - Try multiple approaches
             if category:
                 try:
-                    # Click the trigger
-                    trigger = self.find_element(*self.CATEGORY_SELECT_TRIGGER)
-                    trigger.click()
-                    time.sleep(0.5)
+                    # Try multiple locators for category
+                    category_locators = [
+                        (By.CSS_SELECTOR, "select[id*='category']"),
+                        (By.CSS_SELECTOR, "select[wire\\:model*='category']"),
+                        (By.XPATH, "//label[contains(text(), 'Kategori')]/following-sibling::div//select"),
+                        (By.XPATH, "//label[contains(text(), 'Kategori')]/ancestor::div[contains(@class, 'fi-fo-field-wrp')]//button"),
+                    ]
                     
-                    # Click the option in the dropdown
-                    # Filament dropdowns are often attached to body
-                    option_xpath = f"//div[contains(@class, 'fi-dropdown-panel')]//span[contains(text(), '{category}')]"
-                    option = self.driver.find_element(By.XPATH, option_xpath)
-                    option.click()
-                    time.sleep(0.5)
-                    print(f"✓ Selected category: {category}")
+                    category_set = False
+                    for locator in category_locators:
+                        try:
+                            element = self.driver.find_element(*locator)
+                            
+                            # If it's a select element
+                            if element.tag_name == 'select':
+                                from selenium.webdriver.support.ui import Select
+                                select = Select(element)
+                                select.select_by_visible_text(category)
+                                category_set = True
+                                print(f"✓ Selected category: {category}")
+                                break
+                            # If it's a Filament button trigger
+                            elif element.tag_name == 'button':
+                                element.click()
+                                time.sleep(0.5)
+                                option_xpath = f"//div[contains(@class, 'fi-dropdown-panel')]//span[contains(text(), '{category}')]"
+                                option = self.driver.find_element(By.XPATH, option_xpath)
+                                option.click()
+                                time.sleep(0.5)
+                                category_set = True
+                                print(f"✓ Selected category: {category}")
+                                break
+                        except:
+                            continue
+                    
+                    if not category_set:
+                        print(f"⚠ Category field not found, continuing without it")
+                        
                 except Exception as e:
                     print(f"⚠ Could not select category: {str(e)}")
 
-            # 3. Fill excerpt
-            if excerpt and self.is_element_visible(*self.EXCERPT_INPUT, timeout=2):
-                element = self.find_element(*self.EXCERPT_INPUT)
-                element.clear()
-                element.send_keys(excerpt)
-                print("✓ Filled excerpt")
+            # 3. Fill excerpt (IMPORTANT: Usually required!)
+            if excerpt:
+                if self.is_element_visible(*self.EXCERPT_INPUT, timeout=2):
+                    element = self.find_element(*self.EXCERPT_INPUT)
+                    element.clear()
+                    element.send_keys(excerpt)
+                    print("✓ Filled excerpt")
+                else:
+                    print("⚠ Excerpt field not found")
+            else:
+                print("⚠ No excerpt provided (may be required)")
 
             # 4. Fill content (Trix Editor)
             if content:
@@ -109,10 +141,11 @@ class NewsPage(BasePage):
                     # Trix editor usually has a contenteditable div
                     editor = self.driver.find_element(By.TAG_NAME, "trix-editor")
                     editor.click()
+                    time.sleep(0.3)
                     editor.send_keys(content)
                     print("✓ Filled content")
-                except:
-                    print("⚠ Could not fill content")
+                except Exception as e:
+                    print(f"⚠ Could not fill content: {str(e)}")
 
             # 5. Upload image
             if image_path:
@@ -134,20 +167,48 @@ class NewsPage(BasePage):
             return False
 
     def click_save(self):
-        """Click save button"""
+        """Click save button with improved error detection"""
         print("Clicking save button...")
+        
+        current_url = self.driver.current_url
+        
+        # Try to find and click save button
+        save_button = None
         if self.is_element_visible(*self.SAVE_BUTTON, timeout=3):
-            self.click(*self.SAVE_BUTTON)
-            time.sleep(3)
+            save_button = self.find_element(*self.SAVE_BUTTON)
+        else:
+            # Fallback: try alternative selectors
+            try:
+                save_button = self.driver.find_element(By.XPATH, "//button[@type='submit' and contains(., 'Buat')]")
+            except:
+                try:
+                    save_button = self.driver.find_element(By.XPATH, "//button[@type='submit']")
+                except:
+                    print("⚠ Save button not found")
+                    return False
+        
+        if save_button:
+            # Scroll into view
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
+            time.sleep(0.5)
+            save_button.click()
+            time.sleep(4)  # Wait longer for form submission
             
-            # Check for validation errors
+            # Check if URL changed (successful submission)
+            new_url = self.driver.current_url
+            if new_url != current_url:
+                print("✓ Clicked save (URL changed - success)")
+                return True
+            
+            # Check for validation errors (still on same page)
             errors = self.get_validation_errors()
             if errors:
                 print(f"⚠ Validation Errors found: {errors}")
                 return False
-                
-            print("✓ Clicked save")
-            return True
+            
+            # Still on create page but no explicit errors
+            print(f"⚠ Save clicked but still on create page: {current_url}")
+            return False
         return False
 
     def get_validation_errors(self):

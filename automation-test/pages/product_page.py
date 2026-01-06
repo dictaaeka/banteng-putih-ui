@@ -80,14 +80,44 @@ class ProductPage(BasePage):
             # 2. Category
             if category:
                 try:
-                    trigger = self.find_element(*self.CATEGORY_SELECT_TRIGGER)
-                    trigger.click()
-                    time.sleep(0.5)
-                    option_xpath = f"//div[contains(@class, 'fi-dropdown-panel')]//span[contains(text(), '{category}')]"
-                    option = self.driver.find_element(By.XPATH, option_xpath)
-                    option.click()
-                    time.sleep(0.5)
-                    print(f"✓ Selected category: {category}")
+                    # Try multiple locators for Filament select
+                    category_locators = [
+                        (By.CSS_SELECTOR, "select[id*='category']"),
+                        (By.CSS_SELECTOR, "select[wire\\:model*='category']"),
+                        (By.XPATH, "//label[contains(text(), 'Kategori')]/following-sibling::div//select"),
+                        (By.XPATH, "//label[contains(text(), 'Kategori')]/ancestor::div[contains(@class, 'fi-fo-field-wrp')]//button"),
+                    ]
+                    
+                    category_set = False
+                    for locator in category_locators:
+                        try:
+                            element = self.driver.find_element(*locator)
+                            
+                            # If it's a select element
+                            if element.tag_name == 'select':
+                                from selenium.webdriver.support.ui import Select
+                                select = Select(element)
+                                select.select_by_visible_text(category)
+                                category_set = True
+                                print(f"✓ Selected category: {category}")
+                                break
+                            # If it's a Filament button trigger
+                            elif element.tag_name == 'button':
+                                element.click()
+                                time.sleep(0.5)
+                                option_xpath = f"//div[contains(@class, 'fi-dropdown-panel')]//span[contains(text(), '{category}')]"
+                                option = self.driver.find_element(By.XPATH, option_xpath)
+                                option.click()
+                                time.sleep(0.5)
+                                category_set = True
+                                print(f"✓ Selected category: {category}")
+                                break
+                        except:
+                            continue
+                    
+                    if not category_set:
+                        print(f"⚠ Category field not found, trying to continue without it")
+                        
                 except Exception as e:
                     print(f"⚠ Could not select category: {str(e)}")
 
@@ -104,16 +134,55 @@ class ProductPage(BasePage):
             # 5. Unit
             if unit:
                 try:
-                    trigger = self.find_element(*self.UNIT_SELECT_TRIGGER)
-                    trigger.click()
-                    time.sleep(0.5)
-                    option_xpath = f"//div[contains(@class, 'fi-dropdown-panel')]//span[contains(text(), '{unit}')]"
-                    option = self.driver.find_element(By.XPATH, option_xpath)
-                    option.click()
-                    time.sleep(0.5)
-                    print(f"✓ Selected unit: {unit}")
+                    # Try multiple locators for unit select
+                    unit_locators = [
+                        (By.CSS_SELECTOR, "select[id*='unit']"),
+                        (By.CSS_SELECTOR, "select[wire\\:model*='unit']"),
+                        (By.CSS_SELECTOR, "input[id*='unit']"),  # Might be text input
+                        (By.XPATH, "//label[contains(text(), 'Satuan')]/following-sibling::div//select"),
+                        (By.XPATH, "//label[contains(text(), 'Satuan')]/following-sibling::div//input"),
+                        (By.XPATH, "//label[contains(text(), 'Satuan')]/ancestor::div[contains(@class, 'fi-fo-field-wrp')]//button"),
+                    ]
+                    
+                    unit_set = False
+                    for locator in unit_locators:
+                        try:
+                            element = self.driver.find_element(*locator)
+                            
+                            # If it's a select element
+                            if element.tag_name == 'select':
+                                from selenium.webdriver.support.ui import Select
+                                select = Select(element)
+                                select.select_by_visible_text(unit)
+                                unit_set = True
+                                print(f"✓ Selected unit: {unit}")
+                                break
+                            # If it's a text input
+                            elif element.tag_name == 'input' and element.get_attribute('type') == 'text':
+                                element.clear()
+                                element.send_keys(unit)
+                                unit_set = True
+                                print(f"✓ Filled unit: {unit}")
+                                break
+                            # If it's a Filament button trigger
+                            elif element.tag_name == 'button':
+                                element.click()
+                                time.sleep(0.5)
+                                option_xpath = f"//div[contains(@class, 'fi-dropdown-panel')]//span[contains(text(), '{unit}')]"
+                                option = self.driver.find_element(By.XPATH, option_xpath)
+                                option.click()
+                                time.sleep(0.5)
+                                unit_set = True
+                                print(f"✓ Selected unit: {unit}")
+                                break
+                        except:
+                            continue
+                    
+                    if not unit_set:
+                        print(f"⚠ Unit field not found, trying to continue without it")
+                        
                 except Exception as e:
-                    print(f"⚠ Could not select unit: {str(e)}")
+                    print(f"⚠ Could not set unit: {str(e)}")
 
             # 6. Description
             if description:

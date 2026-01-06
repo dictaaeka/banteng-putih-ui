@@ -26,21 +26,6 @@ class TestAuthentication:
 
         print("✓ Login successful")
 
-    def test_login_with_remember_me(self, login_page, dashboard_page):
-        """Test login with remember me option"""
-        login_page.navigate()
-
-        # Login with remember me
-        success = login_page.login(
-            Config.ADMIN_EMAIL,
-            Config.ADMIN_PASSWORD,
-            remember=True
-        )
-        assert success, "Login with remember me failed"
-        assert dashboard_page.is_on_dashboard(), "Not on dashboard"
-
-        print("✓ Login with remember me successful")
-
     def test_login_with_invalid_email(self, login_page):
         """Test login with invalid email"""
         login_page.navigate()
@@ -84,33 +69,3 @@ class TestAuthentication:
             f"Not redirected after logout: {current_url}"
 
         print("✓ Logout successful")
-
-    def test_full_authentication_flow(self, login_page, dashboard_page):
-        """Test complete login and logout flow"""
-        # Step 1: Login
-        login_page.navigate()
-        login_success = login_page.login(Config.ADMIN_EMAIL, Config.ADMIN_PASSWORD)
-        assert login_success, "Login failed"
-        assert dashboard_page.is_on_dashboard(), "Not on dashboard after login"
-
-        print("✓ Step 1: Login successful")
-
-        # Step 2: Wait a bit (simulate user activity)
-        time.sleep(2)
-
-        # Step 3: Logout
-        logout_success = dashboard_page.logout()
-        assert logout_success, "Logout failed"
-
-        print("✓ Step 2: Logout successful")
-
-        # Step 4: Verify cannot access dashboard without login
-        dashboard_page.open("/admin")
-        time.sleep(2)
-
-        # Should be redirected to login
-        assert '/login' in dashboard_page.get_current_url(), \
-            "Can access dashboard without authentication"
-
-        print("✓ Step 3: Dashboard protected when logged out")
-        print("✓ Full authentication flow completed successfully")

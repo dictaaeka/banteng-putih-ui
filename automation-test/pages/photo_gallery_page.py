@@ -93,18 +93,42 @@ class PhotoGalleryPage(BasePage):
                 print("✗ Title input not found")
                 return False
 
-            # 2. Select category
+            # 2. Select category (optional - try multiple locator strategies)
             if category:
-                try:
-                    button = self.driver.find_element(By.CSS_SELECTOR, "button[id*='category']")
-                    button.click()
-                    time.sleep(0.5)
-                    option = self.driver.find_element(By.XPATH, f"//li[contains(., '{category}')]")
-                    option.click()
-                    time.sleep(0.3)
-                    print(f"✓ Selected category: {category}")
-                except:
-                    print(f"⚠ Could not select category")
+                category_selected = False
+                category_locators = [
+                    (By.CSS_SELECTOR, "select[id*='category']"),
+                    (By.CSS_SELECTOR, "select[wire\\:model*='category']"),
+                    (By.XPATH, "//label[contains(text(), 'Kategori')]//following-sibling::div//select"),
+                    (By.XPATH, "//label[contains(text(), 'Kategori')]//following-sibling::div//button"),
+                    (By.CSS_SELECTOR, "button[id*='category']"),
+                ]
+
+                for locator in category_locators:
+                    try:
+                        element = self.driver.find_element(*locator)
+                        if element.tag_name == 'select':
+                            # Native select element
+                            from selenium.webdriver.support.ui import Select
+                            Select(element).select_by_visible_text(category)
+                            print(f"✓ Selected category (select): {category}")
+                            category_selected = True
+                            break
+                        elif element.tag_name == 'button':
+                            # Filament select with button trigger
+                            element.click()
+                            time.sleep(0.5)
+                            option = self.driver.find_element(By.XPATH, f"//li[contains(., '{category}')]")
+                            option.click()
+                            time.sleep(0.3)
+                            print(f"✓ Selected category (button): {category}")
+                            category_selected = True
+                            break
+                    except:
+                        continue
+
+                if not category_selected:
+                    print(f"⚠ Category field not found, continuing without selection")
 
             # 3. Fill description
             if description and self.is_element_visible(*self.DESCRIPTION_EDITOR, timeout=2):
@@ -166,24 +190,51 @@ class PhotoGalleryPage(BasePage):
 
     def click_delete_in_edit(self):
         """Click delete in edit page"""
-        try:
-            if self.is_element_visible(*self.DELETE_BUTTON, timeout=3):
-                self.click(*self.DELETE_BUTTON)
-                time.sleep(1)
-                return True
-        except:
-            pass
+        delete_locators = [
+            (By.XPATH, "//button[contains(@wire:click, \"mountAction('delete')\")]"),
+            (By.XPATH, "//button[contains(@wire:click, 'mountAction') and contains(@wire:click, 'delete')]"),
+            (By.XPATH, "//button[contains(., 'Delete') or contains(., 'Hapus')]"),
+            (By.CSS_SELECTOR, "button[wire\\:click*='delete']"),
+        ]
+
+        for locator in delete_locators:
+            try:
+                element = self.driver.find_element(*locator)
+                if element.is_displayed():
+                    # Scroll into view
+                    self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+                    time.sleep(0.5)
+                    element.click()
+                    time.sleep(1)
+                    print("✓ Clicked delete button")
+                    return True
+            except:
+                continue
+
+        print("✗ Delete button not found")
         return False
 
     def confirm_delete(self):
         """Confirm delete"""
-        try:
-            if self.is_element_visible(*self.CONFIRM_DELETE_BUTTON, timeout=3):
-                self.click(*self.CONFIRM_DELETE_BUTTON)
-                time.sleep(2)
-                return True
-        except:
-            pass
+        confirm_locators = [
+            (By.XPATH, "//button[@type='submit' and contains(@class, 'fi-color-danger')]"),
+            (By.XPATH, "//button[@type='submit' and contains(., 'Confirm')]"),
+            (By.XPATH, "//button[@type='submit' and contains(., 'Delete')]"),
+            (By.CSS_SELECTOR, "button[type='submit'].fi-color-danger"),
+        ]
+
+        for locator in confirm_locators:
+            try:
+                element = self.driver.find_element(*locator)
+                if element.is_displayed():
+                    element.click()
+                    time.sleep(2)
+                    print("✓ Confirmed delete")
+                    return True
+            except:
+                continue
+
+        print("✗ Confirm delete button not found")
         return False
 
     def wait_for_page_load(self):

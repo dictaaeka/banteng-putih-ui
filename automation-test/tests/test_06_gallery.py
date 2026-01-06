@@ -38,28 +38,12 @@ class TestPhotoGalleryManagement:
             return None
 
     def click_delete_in_edit(self):
-        """Click delete in edit page"""
-        try:
-            delete_btn = self.driver.find_element(
-                By.XPATH, "//button[contains(@wire:click, \"mountAction('delete')\")]"
-            )
-            delete_btn.click()
-            time.sleep(1)
-            return True
-        except:
-            return False
+        """Click delete in edit page - delegates to page object"""
+        return self.gallery_page.click_delete_in_edit()
 
     def confirm_delete(self):
-        """Confirm delete"""
-        try:
-            confirm_btn = self.driver.find_element(
-                By.XPATH, "//button[@type='submit' and contains(@class, 'fi-color-danger')]"
-            )
-            confirm_btn.click()
-            time.sleep(2)
-            return True
-        except:
-            return False
+        """Confirm delete - delegates to page object"""
+        return self.gallery_page.confirm_delete()
 
     # ========== Negative Test Cases ==========
     def test_01_create_photo_without_required(self):
